@@ -14,8 +14,14 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 # Constants
 USER_AGENTS = [
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:88.0) Gecko/20100101 Firefox/88.0',
+   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15',
+   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36 Edg/90.0.818.66',
+   'Mozilla/5.0 (Linux; Android 10; SM-A505FN) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Mobile Safari/537.36',
+   'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1',
+   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+   'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0',
     # More user agents can be added here
 ]
 SITES = {
@@ -35,17 +41,17 @@ def fetch_data(site_name, search_url):
     session = get_session()
     headers = {'User-Agent': random.choice(USER_AGENTS)}
     response = session.get(search_url, headers=headers, timeout=(10, 30))
-    response.raise_for_status()  # Will stop the function and raise HTTPError for bad responses
+    response.raise_for_status()
     return response.text
 
 def parse_data(site_name, html):
     soup = BeautifulSoup(html, 'html.parser')
     if site_name == "Best Buy":
-        product = soup.find("h4", class_="sku-header")
+        product = soup.find("h4", class_="sku-header") or soup.find("h4", class_="sku-title")
         price = soup.find("div", class_="priceView-hero-price priceView-customer-price")
     elif site_name == "Walmart":
-        product = soup.find("a", class_="product-title-link line-clamp line-clamp-2")
-        price = soup.find("span", class_="price-group")
+        product = soup.find("a", class_="product-title-link") or soup.find("a", class_="link-display")
+        price = soup.find("span", class_="price-group") or soup.find("div", class_="price-characteristic")
     elif site_name == "Newegg":
         product = soup.find("a", class_="item-title")
         price = soup.find("li", class_="price-current")
