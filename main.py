@@ -24,19 +24,21 @@ def get_headers():
     return headers
 
 def search_bestbuy(safe_product_name):
-    url = f"https://www.bestbuy.com/site/searchpage.jsp?st={safe_product_name}"
+    url = f"https://www.bestbuy.com/site/searchpage.jsp?st={safe_product_name}&intl=nosplash"
     headers = get_headers()  # Get random User-Agent and other headers
     response = requests.get(url, headers=headers)
     print(response.status_code)
-    print(response.text)
+    #print(response.text)
     soup = BeautifulSoup(response.text, 'html.parser')
-    product_names =[]
-    product_list = soup.find_all('ol', class_='sku-item-list')
-    if product_list:
-        products = product_list.find_all('li', class_='sku-item')  # Adjust class as needed
-        product_names = [prod.find('h4', class_='sku-header').get_text().strip() for prod in products if prod.find('h4', class_='sku-header')]
-    
-    return url, product_names
+    price = "price Not found"
+    # Look for the price within the specified container
+    price_container = soup.find('div', class_='priceView-hero-price priceView-customer-price')
+    if price_container:
+        price_span = price_container.find('span', {'aria-hidden': 'true'})
+        if price_span:
+            price = price_span.get_text().strip()
+
+    return url, price
     
 
 def search_walmart(safe_product_name):
@@ -63,7 +65,7 @@ def main():
     print("\nSearching Bestbuy...")
     bestbuy_results = search_bestbuy(safe_product_name)
     print("\n Bestbuy url: " + bestbuy_results[0]) 
-    print("Bestbuy Results:")
+    print("Price: ")
     print(bestbuy_results[1] or "No results found.")
     
   #  print("\nSearching Walmart...")
