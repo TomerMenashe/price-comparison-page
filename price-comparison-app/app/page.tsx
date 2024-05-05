@@ -27,7 +27,7 @@ const ProductSearch = () => {
     };
 
     const data = {
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       messages: [
         {role: "system", content: "Generate a very fun fact about the product:"},
         {role: "user", content: product}
@@ -46,8 +46,6 @@ const ProductSearch = () => {
         throw new Error('No valid response from OpenAI');
       }
     } catch (error) {
-      console.error("API Error:", error.response ? JSON.stringify(error.response.data) : error.message);
-      throw new Error('Failed to fetch data from the OpenAI API.');
     }
   };
 
@@ -56,20 +54,29 @@ const ProductSearch = () => {
     setProductName(e.target.value);
   };
 
-  // Handler for initiating a search when the search button is clicked
+  // Define a timeout function
+  const timeout = (ms) => new Promise((resolve, reject) => setTimeout(() => reject(new Error('Fetching product fact timed out')), ms));
+
+ // Handler for initiating a search when the search button is clicked
   const handleSearch = async () => {
-    if (!productName.trim()) {
-      setError("Please enter a product name.");
-      return;
-    }
-    setLoading(true);
-    setError('');
-    setResults(null);
-    setProductFact('');
+  if (!productName.trim()) {
+    setError("Please enter a product name.");
+    return;
+  }
+  setLoading(true);
+  setError('');
+  setResults(null);
+  setProductFact('');
 
-    // Fetch a product fact while other data is loading
-    await fetchProductFact(productName);
-
+  // Use Promise.race to handle potential timeout
+  Promise.race([
+    fetchProductFact(productName),
+    timeout(5000)
+  ]).catch(error => {
+    console.warn('Fetching product fact timed out or failed:', error.message);
+    // Optionally set a default message or handle the error in a specific way
+    setProductFact('Could not load a fun fact at this time.');
+  });
     try {
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
       const response = await axios.get(`${apiUrl}/api/compare-prices?product_name=${encodeURIComponent(productName)}`);
