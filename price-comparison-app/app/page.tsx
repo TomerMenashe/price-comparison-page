@@ -10,25 +10,25 @@ const ProductSearch = () => {
   const [results, setResults] = useState(null);
 
   const handleSearch = async () => {
-      if (!productName.trim()) {
-          setError("Please enter a product name.");
-          return;
-      }
+    if (!productName.trim()) {
+      setError("Please enter a product name.");
+      return;
+    }
 
-      setLoading(true);
+    setLoading(true);
+    setError('');
+    setResults(null);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await axios.get(`${apiUrl}/api/compare-prices?product_name=${encodeURIComponent(productName)}`);
+      setResults(response.data);
       setError('');
-      setResults(null);
-
-      try {
-          const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-          const response = await axios.get(`${apiUrl}/api/compare-prices?product_name=${encodeURIComponent(productName)}`);
-          setResults(response.data);
-          setError('');
-      } catch (error) {
-          console.error('Error fetching data:', error);
-          setError('Failed to fetch data. Please try again.');
-      }
-      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('Failed to fetch data. Please try again.');
+    }
+    setLoading(false);
   };
 
   return (
@@ -57,14 +57,20 @@ const ProductSearch = () => {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="text-left p-3 font-semibold text-gray-600">Store</th>
+                  <th className="text-left p-3 font-semibold text-gray-600">Product Name</th>
                   <th className="text-left p-3 font-semibold text-gray-600">Price</th>
                 </tr>
               </thead>
               <tbody className="text-gray-800">
-                {Object.entries(results).map(([key, value], index) => (
-                  <tr key={key} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                    <td className="p-3">{key}</td>
-                    <td className="p-3">{value}</td>
+                {Object.entries(results).map(([store, { price, product_url }], index) => (
+                  <tr key={store} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
+                    <td className="p-3">{store}</td>
+                    <td className="p-3">
+                      <a href={product_url} className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">
+                        {productName}
+                      </a>
+                    </td>
+                    <td className="p-3">{price}</td>
                   </tr>
                 ))}
               </tbody>

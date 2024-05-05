@@ -21,21 +21,29 @@ app.add_middleware(
 async def get_prices(product_name: str):
     try:
         decoded_string = unquote(product_name)
-        print(decoded_string)
         # Setting an overall timeout for all scraper tasks
-        bestbuy_price, newegg_price, walmart_price = await wait_for(gather(
+        results = await wait_for(gather(
             scrape_bestbuy(decoded_string),
             scrape_newegg(decoded_string),
             scrape_walmart(decoded_string)
-
         ), timeout=30)  # 30 seconds timeout
-        print(bestbuy_price)
-        print(walmart_price)
-        print(newegg_price)
+
+        # Extracting prices and URLs from results
+        bestbuy_price = results[0]["price"]
+        bestbuy_url = results[0]["product_url"]
+        print(bestbuy_url)
+        newegg_price = results[1]["price"]
+        newegg_url = results[1]["product_url"]
+        print(newegg_url)
+        walmart_price = results[2]["price"]
+        walmart_url = results[2]["product_url"]
+        print(walmart_url)
+        
+
         return {
-            "BestBuy": bestbuy_price,
-            "Newegg": newegg_price,
-            "Walmart": walmart_price
+            "BestBuy": {"price": bestbuy_price, "product_url": bestbuy_url},
+            "Newegg": {"price": newegg_price, "product_url": newegg_url},
+            "Walmart": {"price": walmart_price, "product_url": walmart_url}
         }
     except TimeoutError:
         return HTTPException(status_code=408, detail="Request timeout, one or more scrapers did not finish in time.")
@@ -43,5 +51,3 @@ async def get_prices(product_name: str):
         # Logging the error and returning a 500 server error response
         print(f"An error occurred: {str(e)}")
         return HTTPException(status_code=500, detail=str(e))
-
-# Remove the test function and main execution block for production deployment
