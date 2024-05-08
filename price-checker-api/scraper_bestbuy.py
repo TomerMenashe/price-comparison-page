@@ -19,9 +19,6 @@ async def scrape_bestbuy(product_name: str) -> dict:
     # Navigate to the URL using Selenium
     driver.get(url)
 
-    # Wait for 5 seconds to let the page load completely
-    time.sleep(5)
-
     # Initialize the result dictionary with default values
     result = {"price": "Price not found", "product_url": ""}
 
@@ -36,9 +33,9 @@ async def scrape_bestbuy(product_name: str) -> dict:
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, '.priceView-hero-price'))
         )
-
         # Store the current URL as the product URL
-        result["product_url"] = driver.current_url
+        result["product_url"] = driver.find_element(By.XPATH, './/a').get_attribute('href')
+        
         
         # Find the element that contains the price
         price_element = driver.find_element(By.CSS_SELECTOR, '.priceView-hero-price')
