@@ -20,7 +20,7 @@ async def scrape_walmart(product_name: str) -> dict:
 
     try:
         # Wait until all elements with the specified class are present in the DOM
-        WebDriverWait(driver, 5).until(
+        WebDriverWait(driver, 10).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, '[class="f2"]'))
         )
 
