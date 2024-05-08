@@ -16,8 +16,8 @@ const ProductSearch = () => {
   const [page, setPage] = useState('landing'); // Controls which page/view to show
 
   // API keys and endpoint configurations
-  const OPENAI_API_KEY = 'sk-proj-iWgMsC1oo6HlffQ39uAPT3BlbkFJ6eVOZidz9D0aiJ8m92Rc'; // API key for OpenAI (should be moved to environment variables)
-  const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions'; // OpenAI API endpoint
+  const OPENAI_API_KEY = process.env.API_KEY; 
+  const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
   // Function to fetch a fun fact about the product using the OpenAI API
   const fetchProductFact = async (product) => {
@@ -95,7 +95,7 @@ const ProductSearch = () => {
     <div className="app-container">
       {page === 'landing' && (
         <>
-          <h1 className="welcome-title">Welcome to Price Comparison Page</h1>
+          <h1 className="welcome-title">Welcome to Price Comparison Page!</h1>
           <h2 className="subtitle">by Tomer Menashe & Guy Abarbanel</h2>
           <div className="card">
             <button className="button" onClick={() => setPage('search')}>Start Searching</button>
