@@ -82,21 +82,31 @@ price-comparison-page/
 
 price-comparison-page/
 ├── price-checker-api/
+│
 │   ├── main.py
+│
 │   ├── scrapers/
+│
 │   │   ├── bestbuy_scraper.py
+│
 │   │   ├── walmart_scraper.py
+│
 │   │   └── newegg_scraper.py
+│
 │   ├── requirements.txt
+│
 │   └── ...
 ├── price-comparison-app/
+│
 │   ├── pages/
+│
 │   │   ├── index.js
+│
 │   │   └── ...
+│
 │   ├── public/
-│   │   ├── Screenshot 2024-05-27 at 19.21.54 (2).png
-│   │   ├── Screenshot 2024-05-27 at 19.22.10.png
-│   │   └── Screenshot 2024-05-27 at 19.23.19.png
+│
+│
 │   ├── package.json
 │   └── ...
 └── README.md
