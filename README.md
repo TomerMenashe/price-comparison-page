@@ -44,51 +44,40 @@ Follow these steps to run the project locally.
    ```sh
    git clone https://github.com/yourusername/price-comparison-page.git
    cd price-comparison-page
-Set Up the Backend
+   
+2. **Set up the backend**
 
 Navigate to the price-checker-api directory:
-
-sh
-Copy code
 cd price-checker-api
+
 Install Python dependencies:
-
-sh
-Copy code
 pip install -r requirements.txt
-Run the FastAPI server:
 
-sh
-Copy code
+Run the FastAPI server:
 uvicorn main:app --reload
-Set Up the Frontend
+
+3. **Set up the backend**
 
 Open a new terminal and navigate to the price-comparison-app directory:
-
-sh
-Copy code
 cd price-comparison-app
+
 Install Node.js dependencies:
-
-sh
-Copy code
 npm install
-Run the Next.js development server:
 
-sh
-Copy code
+Run the Next.js development server:
 npm run dev
-Access the Application
+
+4. **Access the Application**
 
 Open your web browser and navigate to http://localhost:3000.
 
-Usage
+### Usage
 Enter the product name in the search bar and click "Search".
 View the comparison table with prices from BestBuy, Walmart, and Newegg.
 Click on the product names to be redirected to the respective product pages on each site.
-Project Structure
-plaintext
-Copy code
+
+
+### Project Structure
 price-comparison-page/
 ├── price-checker-api/
 │   ├── main.py
@@ -109,7 +98,8 @@ price-comparison-page/
 │   ├── package.json
 │   └── ...
 └── README.md
-Contributing
+
+### Contributing
 Contributions are welcome! Please follow these steps to contribute:
 
 Fork the repository.
@@ -117,5 +107,6 @@ Create a new branch for your feature or bugfix.
 Commit your changes with clear and descriptive messages.
 Push your changes to your forked repository.
 Create a pull request to the main repository.
-Authors
+
+### Authors
 Tomer Menashe
