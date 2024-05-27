@@ -102,7 +102,8 @@ price-comparison-page/
 │   ├── package.json
 │   └── ...
 │
-└── README.md ```
+└── README.md
+```
 
 
 ### Contributing
