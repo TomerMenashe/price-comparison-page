@@ -18,13 +18,14 @@ This project comprises two main components:
 ## Screenshots
 
 ### Welcome Page
-![Welcome Page](./public/Screenshot%202024-05-27%20at%2019.21.54%20(2).png)
+![Welcome Page](https://github.com/TomerMenashe/price-comparison-page/blob/main/price-comparison-app/public/Screenshot%202024-05-27%20at%2019.21.54%20(2).png)
 
 ### Search Page
-![Search Page](./public/Screenshot%202024-05-27%20at%2019.22.10.png)
+![Search Page](https://github.com/TomerMenashe/price-comparison-page/blob/main/price-comparison-app/public/Screenshot%202024-05-27%20at%2019.22.10.png)
 
 ### Search Results
-![Search Results](./public/Screenshot%202024-05-27%20at%2019.23.19.png)
+![Search Results](https://github.com/TomerMenashe/price-comparison-page/blob/main/price-comparison-app/public/Screenshot%202024-05-27%20at%2019.23.19.png)
+
 
 ## Getting Started
 
