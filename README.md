@@ -95,10 +95,6 @@ price-comparison-page/
 │   ├── pages/
 │   │   ├── index.js
 │   │   └── ...
-│   ├── public/
-│   │   ├── Screenshot 2024-05-27 at 19.21.58 (2).png
-│   │   ├── Screenshot 2024-05-27 at 19.22.10.png
-│   │   └── Screenshot 2024-05-27 at 19.23.19.png
 │   ├── package.json
 │   └── ...
 │
