@@ -18,13 +18,13 @@ This project comprises two main components:
 ## Screenshots
 
 ### Welcome Page
-![Welcome Page](./path/to/Screenshot%202024-05-27%20at%2019.21.54%20(2).png)
+![Welcome Page](./public/Screenshot%202024-05-27%20at%2019.21.54%20(2).png)
 
 ### Search Page
-![Search Page](./path/to/Screenshot%202024-05-27%20at%2019.21.58%20(2).png)
+![Search Page](./public/Screenshot%202024-05-27%20at%2019.22.10.png)
 
 ### Search Results
-![Search Results](./path/to/Screenshot%202024-05-27%20at%2019.23.19.png)
+![Search Results](./public/Screenshot%202024-05-27%20at%2019.23.19.png)
 
 ## Getting Started
 
@@ -79,33 +79,56 @@ Click on the product names to be redirected to the respective product pages on e
 
 ### Project Structure
 price-comparison-page/
+
 ├── price-checker-api/
+
 │   ├── main.py
+
 │   ├── scrapers/
+
 │   │   ├── bestbuy_scraper.py
+
 │   │   ├── walmart_scraper.py
+
 │   │   └── newegg_scraper.py
+
 │   ├── requirements.txt
+
 │   └── ...
+
 ├── price-comparison-app/
+
 │   ├── pages/
+
 │   │   ├── index.js
+
 │   │   └── ...
+
 │   ├── public/
+
 │   │   ├── Screenshot 2024-05-27 at 19.21.54 (2).png
+
 │   │   ├── Screenshot 2024-05-27 at 19.21.58 (2).png
+
 │   │   └── Screenshot 2024-05-27 at 19.23.19.png
+
 │   ├── package.json
+
 │   └── ...
+
 └── README.md
 
 ### Contributing
 Contributions are welcome! Please follow these steps to contribute:
 
 Fork the repository.
+
 Create a new branch for your feature or bugfix.
+
 Commit your changes with clear and descriptive messages.
+
 Push your changes to your forked repository.
+
 Create a pull request to the main repository.
 
 ### Authors
