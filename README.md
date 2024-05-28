@@ -56,7 +56,7 @@ pip install -r requirements.txt
 Run the FastAPI server:
 uvicorn main:app --reload
 
-3. **Set up the backend**
+3. **Set up the frontend**
 
 Open a new terminal and navigate to the price-comparison-app directory:
 cd price-comparison-app
@@ -84,10 +84,9 @@ price-comparison-page/
 │
 ├── price-checker-api/
 │   ├── main.py
-│   ├── scrapers/
-│   │   ├── bestbuy_scraper.py
-│   │   ├── walmart_scraper.py
-│   │   └── newegg_scraper.py
+│   │── bestbuy_scraper.py
+│   │── walmart_scraper.py
+│   │── newegg_scraper.py
 │   ├── requirements.txt
 │   └── ...
 │
